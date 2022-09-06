@@ -24,6 +24,21 @@ const items = list(1,2,3,4,5,6,7);
 
 every_type(items, "odd");
 
-function sums(items) {
-    const evenList
+function sum_type(item) {
+    return  is_null(item)
+            ? 0
+            : head(item) + sum_type(tail(item));
 }
+
+function sums(items) {
+    return pair(sum_type(every_type(items, "even")), 
+                pair(sum_type(every_type(items, "odd")), null));
+}
+
+sums(items);
+
+
+// [9, [6, null]]
+/*
+    pair(head(current) + head(tail(items)) )
+*/
