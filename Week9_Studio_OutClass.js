@@ -1,12 +1,29 @@
-// function d_filter(pred, xs) {
-//     // head(xs)
-//     // set_tail?
-//     // without tail????? idk
-// }
+function d_filter(pred, xs) {
+    let first_occurence = false;
+    let recent_pointer = xs;
+    for (let T = xs; !is_null(T); T = tail(T)) {
+        display(head(T));
+        if (pred(head(T))) {
+            if (first_occurence) {
+                xs = T;
+                first_occurence = true;
+                recent_pointer = xs;
+            } else {
+                set_tail(recent_pointer, T);
+                recent_pointer = T;
+            }
+        }
+        else {
+            set_tail(recent_pointer,tail(T));
+        }
+    }
+    return xs;
+}
 
-// const L = list(1, 2, 3, 4, 5, 6, 7, 8, 9, 11);
-// d_filter(x => x % 2 === 0, L); // returns [2, [4, [6, [8, null]]]]
-// L; // What is L now?
+const L = list(1, 2, 3, 4, 5, 6, 7, 8, 9, 11);
+const V = d_filter(x => x % 2 === 0, L); // returns [2, [4, [6, [8, null]]]]
+//L; // What is L now?
+V;
 
 // // if true
 
