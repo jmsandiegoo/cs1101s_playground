@@ -35,7 +35,8 @@ function evaluate(component, env) {
 }
 
 function eval_conditional(comp, env) {
-   display_list(comp);
+    // look up not sure how
+   display(scan_out_declarations(comp));
    return is_truthy(evaluate(conditional_predicate(comp), env))
           ? evaluate(conditional_consequent(comp), env)
           : evaluate(conditional_alternative(comp), env);
