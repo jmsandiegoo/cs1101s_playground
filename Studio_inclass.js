@@ -57,9 +57,11 @@ function eval_sequence(stmts, env) {
                     return list(curr_stmt);
                 }
                 else if (is_function_declaration(curr_stmt)) {
-                    return pair(curr_stmt, rest_statements(hoist_wish));
+                    return pair(curr_stmt, hoist_wish);
                 } else {
-                    return pair(first_statement(hoist_wish), )
+                    return pair(first_statement(hoist_wish), 
+                                hoist(pair(curr_stmt, 
+                                           rest_statements(hoist_wish))));
                 }
                 
                 
