@@ -484,3 +484,7 @@ parse_and_evaluate(`
     }
     x;
 `);
+
+parse_and_evaluate(`
+    false ? abracadabra(simsalabim) : 42;
+`);
