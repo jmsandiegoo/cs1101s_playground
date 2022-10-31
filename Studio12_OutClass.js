@@ -35,6 +35,7 @@ function evaluate(component, env) {
 }
 
 function eval_conditional(comp, env) {
+   display_list(comp);
    return is_truthy(evaluate(conditional_predicate(comp), env))
           ? evaluate(conditional_consequent(comp), env)
           : evaluate(conditional_alternative(comp), env);
@@ -55,16 +56,13 @@ function eval_sequence(stmts, env) {
                 
                 if (is_null(hoist_wish)) {
                     return list(curr_stmt);
-                }
-                else if (is_function_declaration(curr_stmt)) {
+                } else if (is_function_declaration(curr_stmt)) {
                     return pair(curr_stmt, hoist_wish);
                 } else {
                     return pair(first_statement(hoist_wish), 
                                 hoist(pair(curr_stmt, 
                                            rest_statements(hoist_wish))));
                 }
-                
-                
             }
         };
         stmts = hoist(stmts);
@@ -477,13 +475,13 @@ function parse_and_evaluate(program) {
 }
 
 // test cases
-parse_and_evaluate(`  
-    const x = f(8);
-    function f(y) {		
-       y + 34;
-    }
-    x;
-`);
+// parse_and_evaluate(`  
+//     const x = f(8);
+//     function f(y) {		
+//       y + 34;
+//     }
+//     x;
+// `);
 
 parse_and_evaluate(`
     false ? abracadabra(simsalabim) : 42;
