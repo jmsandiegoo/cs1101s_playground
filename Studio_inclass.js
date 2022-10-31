@@ -46,11 +46,13 @@ function eval_sequence(stmts, env) {
     } else if (is_last_statement(stmts)) {
         return evaluate(first_statement(stmts), env);
     } else {
+        const insert = (curr_stmts) => {
+            
+        }
         const hoist = (nstmts) => {
             if (is_null(nstmts)) {
                 return nstmts;
             } else {
-                
                 return insert(first_statement(nstmts), 
                        hoist(rest_statements(nstmts)));
             }
