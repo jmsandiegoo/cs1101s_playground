@@ -46,21 +46,26 @@ function eval_sequence(stmts, env) {
     } else if (is_last_statement(stmts)) {
         return evaluate(first_statement(stmts), env);
     } else {
-        const insert = (curr_stmts, hoisted_seq) => {
-            if (is_null(hoisted_seq)) {
-                return list(curr_stmts);
-            } else {
-                if ()
-            }
-        }
         const hoist = (nstmts) => {
             if (is_null(nstmts)) {
                 return nstmts;
             } else {
-                return insert(first_statement(nstmts), 
-                       hoist(rest_statements(nstmts)));
+                const curr_stmt = first_statement(nstmts);
+                const hoist_wish = hoist(rest_statements(nstmts));
+                
+                if (is_null(hoist_wish)) {
+                    return list(curr_stmt);
+                }
+                else if (is_function_declaration(curr_stmt)) {
+                    return pair(curr_stmt, rest_statements(hoist_wish));
+                } else {
+                    return pair(first_statement(hoist_wish), )
+                }
+                
+                
             }
         };
+        stmts = hoist(stmts);
         const ignore = evaluate(first_statement(stmts), env);
         return eval_sequence( rest_statements(stmts), env); 
     } 
