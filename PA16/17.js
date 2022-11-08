@@ -427,15 +427,35 @@
 ////////////////////////////////////////////////////////////
 
 function build_BAE_tree(bae_list) {
-
+    
+    const split_exp = (xs) => {
+        let counter = 0;
+        function helper(scanned, ys) {
+            if (counter === 0 && is_null(scanned)) {
+                return 
+            } else {
+                if (head(ys) === "(") {
+                    counter + 1;
+                }
+                if (head(ys) === ")") {
+                    counter - 1;
+                }
+                return helper(scanned, helper(scanned, tail(ys)));
+            }
+        }
+        return helper(null, xs);
+    };
+    
     // WRITE HERE.
     if (is_number(bae_list)) {
         return bae_list;
     } else {
-        return list();
+        
+        return list(wish);
     }
 }
 
+// find opening parenthesis
 
 
 ////////////////////////////////////////////////////////////
