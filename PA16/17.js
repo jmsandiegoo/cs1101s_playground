@@ -425,35 +425,30 @@
 ////////////////////////////////////////////////////////////
 // Question 3B
 ////////////////////////////////////////////////////////////
-
+    
 function build_BAE_tree(bae_list) {
-    
-    const split_exp = (xs) => {
-        let counter = 0;
-        function helper(scanned, ys) {
-            if (counter === 0 && is_null(scanned)) {
-                return 
-            } else {
-                if (head(ys) === "(") {
-                    counter + 1;
-                }
-                if (head(ys) === ")") {
-                    counter - 1;
-                }
-                return helper(scanned, helper(scanned, tail(ys)));
-            }
-        }
-        return helper(null, xs);
-    };
-    
     // WRITE HERE.
-    if (is_number(bae_list)) {
-        return bae_list;
-    } else {
-        
-        return list(wish);
+    let next_token = bae_list;
+
+    function build_tree() {
+        if (equal(head(next_token), "(")) {
+            next_token = tail(next_token);
+            const left_tree = build_tree();
+            const op = head(next_token);
+            next_token = tail(next_token);
+            const right_tree = build_tree();
+            next_token = tail(next_token); // skip over ")"
+            return list(left_tree, op, right_tree);
+        } else { // token is a number
+            const token = head(next_token);
+            next_token = tail(next_token);
+            return token;
+        }
     }
+
+    return build_tree();
 }
+
 
 // find opening parenthesis
 
