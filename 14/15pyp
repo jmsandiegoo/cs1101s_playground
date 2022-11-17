@@ -1,0 +1,79 @@
+// 16/17 answers
+
+// 3B
+
+// function mergeB(xs, ys) {
+//     if (is_null(xs)) {
+//         return ys;
+//     } else if (is_null(ys)) {
+//         return xs;
+//     } else {
+//         const head1 = head(xs);
+//         const head2 = head(ys);
+//         if (head1 < head2) {
+//             const wish = mergeB(tail(xs), ys);
+//             set_tail(xs,wish);
+//             return xs;
+//         } else {
+//             set_tail(ys, mergeB(xs, tail(ys)));
+//             return ys;
+//         }
+//     }
+// }
+
+// mergeB(list(1,5,7), list(3, 4, 6));
+
+// 4A
+// wrong
+// function make_circular_copy(xs) {
+//     function helper(ys) {
+//         if (is_null(ys)) {
+//             return helper(xs);
+//         } else {
+//             return pair(head(ys), helper(tail(ys)));
+//         }
+//     }
+    
+//     return helper(xs);
+// }
+
+function make_circular_copy(xs) {
+    function helper(ys, copy) {
+        if (is_null(ys)) {
+            return copy;
+        } else {
+            return pair(head(ys), helper(tail(ys), copy));
+        }
+    }
+    
+    if (is_null(xs)) {
+        return xs;
+    } else {
+        const copy = pair(head(xs), null);
+        set_tail(copy, helper(tail(xs), copy));
+        return copy;
+    }
+}
+
+//correct
+// function make_circular_copy(xs) {
+//     function inner(zs, ys) {
+//         if (is_null(zs)) {
+//             return ys;
+//         } else {
+//             return pair(head(zs), inner(tail(zs), ys));
+//         }
+//     }
+
+//     if (is_null(xs)) {
+//         return null;
+//     } else {
+//         let ys = pair(head(xs), null);
+//         set_tail(ys, inner(tail(xs), ys));
+//         return ys;
+//     }
+// }
+const list1 = list(1,2,3);
+const copy = make_circular_copy(list1);
+
+list_ref(make_circular_copy(list(1,2,3)), 4);
